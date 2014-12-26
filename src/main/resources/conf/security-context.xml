@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2010-2012. Axon Framework
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:context="http://www.springframework.org/schema/context"
+             xmlns="http://www.springframework.org/schema/security"
+             xsi:schemaLocation="
+             http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+             http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+             http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.si.xe.trader.webui.security"/>
+
+    <http pattern="/js/**" security="none"/>
+    <http pattern="/favicon.ico" security="none"/>
+    <http pattern="/style/**" security="none"/>
+    <http pattern="/login.jsp*" security="none"/>
+    <http pattern="/rest/**" security="none"/>
+
+    <http auto-config='true' use-expressions="true">
+        <intercept-url pattern="/" access="isAnonymous() or isAuthenticated()"/>
+        <intercept-url pattern="/index.html" access="isAnonymous() or isAuthenticated()"/>
+        <intercept-url pattern="/data/**" access="isAnonymous() or isAuthenticated()"/>
+        <intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
+        <form-login login-page="/login.jsp" authentication-failure-url="/login.jsp?login_error=1"/>
+        <logout logout-success-url="/"/>
+    </http>
+
+    <authentication-manager>
+        <authentication-provider ref="traderAuthenticationProvider"/>
+    </authentication-manager>
+
+</beans:beans>

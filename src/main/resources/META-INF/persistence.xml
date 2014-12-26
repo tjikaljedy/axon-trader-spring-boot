@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ~ Copyright (c) 2010. Axon Framework ~ ~ Licensed under the Apache License, 
+	Version 2.0 (the "License"); ~ you may not use this file except in compliance 
+	with the License. ~ You may obtain a copy of the License at ~ ~ http://www.apache.org/licenses/LICENSE-2.0 
+	~ ~ Unless required by applicable law or agreed to in writing, software ~ 
+	distributed under the License is distributed on an "AS IS" BASIS, ~ WITHOUT 
+	WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. ~ See the 
+	License for the specific language governing permissions and ~ limitations 
+	under the License. -->
+
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	version="1.0">
+	<persistence-unit name="bageaxe_db" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>com.si.xe.trader.query.instrument.InstrumentEntry</class>
+        <class>com.si.xe.trader.query.orderbook.OrderEntry</class>
+        <class>com.si.xe.trader.query.orderbook.OrderBookEntry</class>
+        <class>com.si.xe.trader.query.portfolio.PortfolioEntry</class>
+        <class>com.si.xe.trader.query.portfolio.ItemEntry</class>
+        <class>com.si.xe.trader.query.tradeexecuted.TradeExecutedEntry</class>
+        <class>com.si.xe.trader.query.transaction.TransactionEntry</class>
+        <class>com.si.xe.trader.query.users.UserEntry</class>
+		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
+			<property name="hibernate.hbm2ddl.auto" value="none" />
+			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.HashtableCacheProvider" />
+			<property name="hibernate.connection.url"
+				value="jdbc:mysql://localhost:3396/bageaxe_db" />
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
+			<property name="hibernate.connection.username" value="root" />
+			<property name="hibernate.connection.password" value="admin" />
+			<property name="hibernate.c3p0.idle_test_period" value="3000" />
+		</properties>
+	</persistence-unit>
+</persistence>
